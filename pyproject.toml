@@ -1,0 +1,67 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "frontier-router"
+version = "0.1.0"
+description = "A capability-aware routing layer across frontier AI models."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { file = "LICENSE" }
+authors = [
+    { name = "Moneer Shoukri" }
+]
+keywords = ["llm", "ai", "routing", "anthropic", "openai", "gemini", "grok", "mcp"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+
+# Core is zero-dependency; providers load their SDKs lazily.
+dependencies = []
+
+[project.optional-dependencies]
+anthropic = ["anthropic>=0.40.0"]
+openai = ["openai>=1.50.0"]
+google = ["google-genai>=0.3.0"]
+xai = ["xai-sdk>=0.1.0"]
+all = [
+    "anthropic>=0.40.0",
+    "openai>=1.50.0",
+    "google-genai>=0.3.0",
+    "xai-sdk>=0.1.0",
+]
+dev = [
+    "pytest>=8.0",
+    "ruff>=0.6.0",
+    "mypy>=1.11",
+]
+
+[project.urls]
+Homepage = "https://github.com/Moneer-S/frontier-router"
+Repository = "https://github.com/Moneer-S/frontier-router"
+Issues = "https://github.com/Moneer-S/frontier-router/issues"
+
+[project.scripts]
+frontier-router = "frontier_router.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "UP", "B", "SIM"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = "test_*.py"
